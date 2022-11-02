@@ -1,0 +1,71 @@
+<html>
+
+<head>
+
+    <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
+
+
+</head>
+
+<body>
+    <div id="app">
+        <header>
+
+            <h1 v-text="sitename">Subjects</h1>
+       
+        </header>
+
+        <main>
+            <p v-text="product.subject"></p>
+            <p v-text="product.location"></p>
+            <p v-text="product.price"></p>
+            <p><b>Spaces:</b> <span v-if="product.Spaces - totalItemsIntheCart > 0">Only {{product.Spaces - totalItemsIntheCart }} left</span>
+           
+<br>
+<br>
+            <button v-on:click="additemtocart" v-bind:disabled="!canaddtocart">Add to cart</button>
+        </main>
+        </header>
+    </div>
+    <script>
+        let webstore = new Vue({
+            el: '#app',
+            data: {
+                sitename: "SCHOOL",
+                product: {
+                    id: 1001,
+                    subject: "Subject:Math",
+                    location: "Location:London",
+                    price: "price:£100",
+                    Spaces: 5,
+                },
+                cart: []
+            },
+            methods: {
+                additemtocart: function () {
+                    this.cart.push(this.product.id);
+                },
+               
+            },
+                computed: {
+                    totalItemsIntheCart: function () {
+                      return this.cart.length;
+                    
+
+                    },
+                    canaddtocart(){
+                     return this.product.Spaces >this.totalItemsIntheCart;
+
+                    }
+                    
+
+                }
+            }
+        
+
+
+        )
+    </script>
+</body>
+
+</html>
